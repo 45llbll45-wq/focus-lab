@@ -1,0 +1,259 @@
+import React, { useState } from 'react';
+import { Clock, Battery } from 'lucide-react';
+import type { TaskCategory, EnergyLevel, Screen } from '../../types';
+import { Button } from '../Common/Button';
+
+export interface NewTaskScreenProps {
+  onPlanGenerated: (data: {
+    title: string;
+    category: TaskCategory;
+    timeMinutes: number;
+    energy: EnergyLevel;
+  }) => void;
+  onNavigate?: (screen: Screen) => void;
+}
+
+export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
+  onPlanGenerated
+}) => {
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState<TaskCategory | null>('learn');
+  const [timeMinutes, setTimeMinutes] = useState<number | null>(30);
+  const [isCustomTime, setIsCustomTime] = useState(false);
+  const [customTimeValue, setCustomTimeValue] = useState('25');
+  const [energy, setEnergy] = useState<EnergyLevel | null>('medium');
+
+  const quickIdeas = [
+    'أتعلم Webhooks في Make',
+    'أبني Automation لجدولة المنشورات',
+    'أجرب AI Agent مع OpenAI',
+    'أكتب سكريبت Reel عن الأوتوميشن'
+  ];
+
+  const effectiveTime = isCustomTime ? parseInt(customTimeValue, 10) || 0 : timeMinutes || 0;
+  const isValid = title.trim().length > 0 && category !== null && effectiveTime > 0 && energy !== null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValid || !category || !energy) return;
+
+    onPlanGenerated({
+      title: title.trim(),
+      category,
+      timeMinutes: effectiveTime,
+      energy
+    });
+  };
+
+  const categories: { id: TaskCategory; label: string; icon: string }[] = [
+    { id: 'learn', label: 'أتعلم', icon: '🧠' },
+    { id: 'build', label: 'أبني', icon: '⚡' },
+    { id: 'content', label: 'محتوى', icon: '✍️' },
+    { id: 'other', label: 'أخرى', icon: '🎯' }
+  ];
+
+  const timeOptions = [15, 30, 45, 60];
+
+  const energyLevels: { id: EnergyLevel; label: string; icon: string; desc: string }[] = [
+    { id: 'low', label: 'منخفضة', icon: '🔋', desc: 'خطوات أصغر وتدرج خفيف' },
+    { id: 'medium', label: 'متوسطة', icon: '⚡', desc: 'جلسة متوازنة ومباشرة' },
+    { id: 'high', label: 'عالية', icon: '🔥', desc: 'تحدي وتركيز عميق' }
+  ];
+
+  return (
+    <form onSubmit={handleSubmit} className="flex-1 flex flex-col p-5 space-y-6 justify-between">
+      <div className="space-y-5">
+        {/* 1. Header */}
+        <div className="space-y-1">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#017CC3]">
+            <span>الخطوة 1 من 4: تحديد الهدف</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">
+            وش تبين تنجزين؟
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500">
+            اكتبي هدفك بكلماتك البسيطة، والتطبيق سيقسمه لخطوات تناسب وقتك وطاقتك.
+          </p>
+        </div>
+
+        {/* 2. Real Interactive Textarea */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-bold text-[#0F172A]">
+              المهمة أو الهدف:
+            </label>
+            <span className="text-[11px] text-slate-400">
+              {title.length}/120
+            </span>
+          </div>
+          <textarea
+            value={title}
+            onChange={(e) => setTitle(e.target.value.slice(0, 120))}
+            placeholder="مثال: فهم وتطبيق الـ Webhooks في أداة Make لربط النماذج مع Google Sheets..."
+            rows={3}
+            className="w-full p-3.5 text-sm font-medium rounded-2xl bg-white border-2 border-slate-200 focus:border-[#017CC3] focus:ring-4 focus:ring-[#017CC3]/10 outline-none transition-all placeholder:text-slate-400 resize-none shadow-xs text-[#0F172A]"
+            autoFocus
+          />
+
+          {/* Quick Idea Chips */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+            <span className="text-[11px] text-slate-400 shrink-0">اقتراحات سريعة:</span>
+            {quickIdeas.map((idea, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setTitle(idea)}
+                className="text-[11px] bg-slate-100 hover:bg-[#ADD4E5]/30 hover:text-[#017CC3] text-slate-600 px-2.5 py-1 rounded-full whitespace-nowrap transition-colors cursor-pointer shrink-0"
+              >
+                + {idea}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 3. Category Selector */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-[#0F172A] block">
+            التصنيف:
+          </label>
+          <div className="grid grid-cols-4 gap-2">
+            {categories.map((cat) => {
+              const selected = category === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setCategory(cat.id)}
+                  className={`p-2.5 rounded-2xl border-2 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                    selected
+                      ? 'border-[#017CC3] bg-[#017CC3]/5 text-[#017CC3] font-bold shadow-xs'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                  }`}
+                >
+                  <span className="text-lg">{cat.icon}</span>
+                  <span className="text-xs">{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 4. Estimated Time */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5 text-[#017CC3]" />
+              <span>الوقت المتوقع للجلسة:</span>
+            </label>
+            <span className="text-xs font-bold text-[#017CC3]">
+              {effectiveTime > 0 ? `${effectiveTime} دقيقة` : 'غير محدد'}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-5 gap-2">
+            {timeOptions.map((t) => {
+              const selected = !isCustomTime && timeMinutes === t;
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => {
+                    setIsCustomTime(false);
+                    setTimeMinutes(t);
+                  }}
+                  className={`py-2 px-1 rounded-2xl border-2 text-xs font-bold transition-all cursor-pointer ${
+                    selected
+                      ? 'border-[#017CC3] bg-[#017CC3] text-white shadow-xs'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                  }`}
+                >
+                  {t} د
+                </button>
+              );
+            })}
+
+            <button
+              type="button"
+              onClick={() => setIsCustomTime(true)}
+              className={`py-2 px-1 rounded-2xl border-2 text-xs font-bold transition-all cursor-pointer ${
+                isCustomTime
+                  ? 'border-[#017CC3] bg-[#017CC3] text-white shadow-xs'
+                  : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+              }`}
+            >
+              مخصص
+            </button>
+          </div>
+
+          {isCustomTime && (
+            <div className="flex items-center gap-2 mt-2 bg-white p-2.5 rounded-2xl border border-slate-200">
+              <span className="text-xs text-slate-500 font-medium">أدخل الدقائق:</span>
+              <input
+                type="number"
+                min="5"
+                max="180"
+                value={customTimeValue}
+                onChange={(e) => setCustomTimeValue(e.target.value)}
+                className="w-20 p-1.5 text-center text-sm font-bold bg-slate-50 rounded-xl border border-slate-300 outline-none focus:border-[#017CC3]"
+                autoFocus
+              />
+              <span className="text-xs text-slate-400">دقيقة (بين 5 و 180)</span>
+            </div>
+          )}
+        </div>
+
+        {/* 5. Energy Level Selector */}
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
+            <Battery className="w-3.5 h-3.5 text-[#017CC3]" />
+            <span>مستوى طاقتك الآن:</span>
+          </label>
+          <div className="grid grid-cols-3 gap-2">
+            {energyLevels.map((lvl) => {
+              const selected = energy === lvl.id;
+              return (
+                <button
+                  key={lvl.id}
+                  type="button"
+                  onClick={() => setEnergy(lvl.id)}
+                  className={`p-3 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all cursor-pointer text-right ${
+                    selected
+                      ? 'border-[#FFE902] bg-[#FFE902]/15 text-[#0F172A] shadow-xs'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <span>{lvl.icon}</span>
+                    <span className="text-xs font-bold">{lvl.label}</span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-normal leading-tight">
+                    {lvl.desc}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* 6. Primary Action: توليد الخطة الذكية */}
+      <div className="pt-4 sticky bottom-4 z-20">
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          fullWidth
+          disabled={!isValid}
+          className="bg-[#017CC3] hover:bg-[#0169a5] shadow-xl text-base font-bold transition-all"
+        >
+          توليد خطة التنفيذ الذكية ✨
+        </Button>
+        {!isValid && (
+          <p className="text-[11px] text-slate-400 text-center mt-2 font-medium">
+            * يُرجى كتابة المهمة وتحديد الوقت والتصنيف والطاقة للتفعيل
+          </p>
+        )}
+      </div>
+    </form>
+  );
+};
