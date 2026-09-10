@@ -24,12 +24,12 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const variantStyles = {
-    default: 'bg-slate-100 text-slate-700 border border-slate-200/80',
-    primary: 'bg-sky-50 text-[#0284C7] border border-sky-200/80',
-    accent: 'bg-amber-50 text-amber-800 border border-amber-200/80',
-    soft: 'bg-slate-50 text-slate-600 border border-slate-200',
-    outline: 'bg-transparent text-slate-600 border border-slate-300',
-    success: 'bg-emerald-50 text-emerald-700 border border-emerald-200/80'
+    default: 'bg-[#F4EDE0] text-[#393313] border border-[#EBDDCB]',
+    primary: 'bg-[#66693E]/15 text-[#393313] border border-[#66693E]/30 font-bold',
+    accent: 'bg-[#31031F]/10 text-[#31031F] border border-[#31031F]/25 font-bold',
+    soft: 'bg-[#FFF8ED] text-[#393313] border border-[#EBDDCB]',
+    outline: 'bg-transparent text-[#393313] border border-[#D9C9B4]',
+    success: 'bg-[#66693E]/20 text-[#393313] border border-[#66693E]/40 font-bold'
   };
 
   return (
@@ -41,10 +41,10 @@ export const Badge: React.FC<BadgeProps> = ({
 
 export const CategoryBadge: React.FC<{ category: TaskCategory }> = ({ category }) => {
   const configs: Record<TaskCategory, { label: string; icon: string; className: string }> = {
-    learn: { label: 'أتعلم', icon: '🧠', className: 'bg-sky-50 text-sky-700 border-sky-200/80' },
-    build: { label: 'أبني', icon: '⚡', className: 'bg-indigo-50 text-indigo-700 border-indigo-200/80' },
-    content: { label: 'محتوى', icon: '✍️', className: 'bg-amber-50 text-amber-800 border-amber-200/80' },
-    other: { label: 'أخرى', icon: '🎯', className: 'bg-slate-100 text-slate-700 border-slate-200/80' }
+    learn: { label: 'أتعلم', icon: '🧠', className: 'bg-[#66693E]/15 text-[#393313] border-[#66693E]/30' },
+    build: { label: 'أبني', icon: '⚡', className: 'bg-[#31031F]/10 text-[#31031F] border-[#31031F]/25' },
+    content: { label: 'محتوى', icon: '✍️', className: 'bg-[#C5A880]/25 text-[#4A321F] border-[#C5A880]/50' },
+    other: { label: 'أخرى', icon: '🎯', className: 'bg-[#F4EDE0] text-[#393313] border-[#EBDDCB]' }
   };
 
   const config = configs[category] || configs.other;
@@ -59,9 +59,9 @@ export const CategoryBadge: React.FC<{ category: TaskCategory }> = ({ category }
 
 export const EnergyBadge: React.FC<{ energy: EnergyLevel }> = ({ energy }) => {
   const configs: Record<EnergyLevel, { label: string; icon: string; className: string }> = {
-    low: { label: 'طاقة منخفضة', icon: '🔋', className: 'bg-emerald-50 text-emerald-700 border-emerald-200/80' },
-    medium: { label: 'طاقة متوسطة', icon: '⚡', className: 'bg-sky-50 text-sky-700 border-sky-200/80' },
-    high: { label: 'طاقة عالية', icon: '🔥', className: 'bg-amber-50 text-amber-800 border-amber-200/80' }
+    low: { label: 'طاقة منخفضة', icon: '🔋', className: 'bg-[#66693E]/15 text-[#393313] border-[#66693E]/30' },
+    medium: { label: 'طاقة متوسطة', icon: '⚡', className: 'bg-[#8C7A6B]/15 text-[#393313] border-[#8C7A6B]/30' },
+    high: { label: 'طاقة عالية', icon: '🔥', className: 'bg-[#31031F]/12 text-[#31031F] border-[#31031F]/25' }
   };
 
   const config = configs[energy] || configs.medium;
@@ -76,10 +76,10 @@ export const EnergyBadge: React.FC<{ energy: EnergyLevel }> = ({ energy }) => {
 
 export const ContentFormatBadge: React.FC<{ format: ContentFormat }> = ({ format }) => {
   const configs: Record<ContentFormat, { label: string; className: string }> = {
-    reel: { label: 'Reel 🎥', className: 'bg-purple-50 text-purple-700 border-purple-200/80' },
-    carousel: { label: 'Carousel 📑', className: 'bg-blue-50 text-blue-700 border-blue-200/80' },
-    post: { label: 'Post 📝', className: 'bg-amber-50 text-amber-800 border-amber-200/80' },
-    tutorial: { label: 'Tutorial 🛠️', className: 'bg-emerald-50 text-emerald-700 border-emerald-200/80' }
+    reel: { label: 'Reel 🎥', className: 'bg-[#31031F]/10 text-[#31031F] border-[#31031F]/25' },
+    carousel: { label: 'Carousel 📑', className: 'bg-[#66693E]/15 text-[#393313] border-[#66693E]/30' },
+    post: { label: 'Post 📝', className: 'bg-[#C5A880]/25 text-[#4A321F] border-[#C5A880]/50' },
+    tutorial: { label: 'Tutorial 🛠️', className: 'bg-[#5B6D5B]/15 text-[#2C3E2C] border-[#5B6D5B]/30' }
   };
 
   const config = configs[format] || configs.post;
@@ -93,9 +93,9 @@ export const ContentFormatBadge: React.FC<{ format: ContentFormat }> = ({ format
 
 export const ContentStatusBadge: React.FC<{ status: ContentStatus }> = ({ status }) => {
   const configs: Record<ContentStatus, { label: string; className: string }> = {
-    idea: { label: 'فكرة (Idea)', className: 'bg-slate-100 text-slate-700 border-slate-200' },
-    draft: { label: 'مسودة (Draft)', className: 'bg-amber-50 text-amber-800 border-amber-200/80 font-semibold' },
-    published: { label: 'تم النشر (Published) ✓', className: 'bg-emerald-50 text-emerald-700 border-emerald-200/80 font-semibold' }
+    idea: { label: 'فكرة (Idea)', className: 'bg-[#F4EDE0] text-[#393313] border-[#EBDDCB]' },
+    draft: { label: 'مسودة (Draft)', className: 'bg-[#C5A880]/25 text-[#4A321F] border-[#C5A880]/50 font-semibold' },
+    published: { label: 'تم النشر (Published) ✓', className: 'bg-[#66693E]/20 text-[#393313] border-[#66693E]/40 font-semibold' }
   };
 
   const config = configs[status] || configs.idea;

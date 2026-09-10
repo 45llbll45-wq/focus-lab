@@ -69,17 +69,17 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
   ];
 
   return (
-    <div className="flex-1 flex flex-col p-5 space-y-4">
+    <div className="flex-1 flex flex-col p-5 space-y-4 text-[#31031F]">
       {/* 1. Header */}
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0284C7]">
-            <Sparkles className="w-3.5 h-3.5 text-[#0284C7]" />
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#66693E]">
+            <Sparkles className="w-3.5 h-3.5 text-[#66693E]" />
             <span>توليد مسودة المحتوى</span>
           </div>
           <button
             onClick={() => regenerate(format)}
-            className="text-xs text-slate-500 hover:text-[#0284C7] flex items-center gap-1 cursor-pointer font-medium"
+            className="text-xs text-[#393313] hover:text-[#31031F] flex items-center gap-1 cursor-pointer font-semibold bg-[#F4EDE0] px-2.5 py-1 rounded-xl border border-[#EBDDCB] transition-colors"
             title="إعادة الصياغة"
           >
             <RefreshCw className="w-3 h-3" />
@@ -87,18 +87,18 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
           </button>
         </div>
 
-        <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">
+        <h1 className="text-2xl font-bold text-[#31031F] tracking-tight">
           وش أقدر أنشر؟
         </h1>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-[#6B5E5B]">
           حوّلنا ما تعلمتيه إلى مسودة محتوى قابلة للتعديل والمشاركة فوراً.
         </p>
       </div>
 
       {/* 2. Format Switcher */}
       <div className="space-y-1.5">
-        <label className="text-xs font-bold text-slate-700 block">نوع القالب:</label>
-        <div className="grid grid-cols-4 gap-1.5 bg-slate-100 p-1 rounded-2xl">
+        <label className="text-xs font-bold text-[#31031F] block">نوع القالب:</label>
+        <div className="grid grid-cols-4 gap-1.5 bg-[#F4EDE0] p-1 rounded-2xl border border-[#EBDDCB]">
           {formats.map((fmt) => {
             const active = format === fmt.id;
             return (
@@ -108,8 +108,8 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
                 onClick={() => setFormat(fmt.id)}
                 className={`py-2 px-1 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1 cursor-pointer ${
                   active
-                    ? 'bg-white text-[#0284C7] shadow-xs'
-                    : 'text-slate-500 hover:text-slate-700'
+                    ? 'bg-[#66693E] text-[#FFF8ED] shadow-2xs'
+                    : 'text-[#393313] hover:text-[#31031F]'
                 }`}
               >
                 <span>{fmt.label}</span>
@@ -123,32 +123,32 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
       <div className="space-y-3 flex-1 flex flex-col">
         {/* Title / Angle */}
         <div className="space-y-1">
-          <label className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
+          <label className="text-xs font-bold text-[#31031F] flex items-center gap-1">
             <span>فكرة المحتوى (العنوان/الزاوية)</span>
-            <Edit3 className="w-3 h-3 text-slate-400" />
+            <Edit3 className="w-3 h-3 text-[#8C7A6B]" />
           </label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2.5 bg-white text-xs sm:text-sm font-bold rounded-xl border border-slate-200 focus:border-[#0284C7] outline-none shadow-xs text-[#0F172A]"
+            className="w-full p-2.5 bg-[#FFFDF9] text-xs sm:text-sm font-bold rounded-xl border border-[#EBDDCB] focus:border-[#66693E] outline-none shadow-2xs text-[#31031F]"
           />
         </div>
 
         {/* Hook */}
         <div className="space-y-1">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
+            <label className="text-xs font-bold text-[#31031F] flex items-center gap-1">
               <span>Hook (خطاف الثواني الأولى)</span>
-              <span className="bg-amber-100 text-amber-900 px-1.5 py-0.2 rounded text-[10px] font-bold">
+              <span className="bg-[#C5A880]/30 text-[#4A321F] px-1.5 py-0.2 rounded text-[10px] font-bold border border-[#C5A880]/50">
                 عالي التفاعل ⚡
               </span>
             </label>
             <button
               onClick={() => handleCopy(hook, 'hook')}
-              className="text-[11px] text-slate-500 hover:text-[#0284C7] flex items-center gap-1 cursor-pointer font-medium"
+              className="text-[11px] text-[#393313] hover:text-[#31031F] flex items-center gap-1 cursor-pointer font-semibold bg-[#F4EDE0] px-2 py-0.5 rounded-lg border border-[#EBDDCB]"
             >
-              {copiedField === 'hook' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+              {copiedField === 'hook' ? <Check className="w-3 h-3 text-[#66693E]" /> : <Copy className="w-3 h-3" />}
               <span>{copiedField === 'hook' ? 'تم النسخ!' : 'نسخ'}</span>
             </button>
           </div>
@@ -156,22 +156,22 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
             value={hook}
             onChange={(e) => setHook(e.target.value)}
             rows={2}
-            className="w-full p-2.5 bg-amber-50/50 border border-amber-200 text-xs sm:text-sm font-medium rounded-xl focus:border-[#0284C7] outline-none resize-none shadow-xs text-amber-950"
+            className="w-full p-2.5 bg-[#C5A880]/10 border border-[#C5A880]/40 text-xs sm:text-sm font-medium rounded-xl focus:border-[#66693E] outline-none resize-none shadow-2xs text-[#31031F]"
           />
         </div>
 
         {/* Core Script / Body */}
         <div className="space-y-1 flex-1 flex flex-col">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
+            <label className="text-xs font-bold text-[#31031F] flex items-center gap-1">
               <span>الفكرة الأساسية والمسودة</span>
-              <span className="text-[10px] text-slate-400 font-normal">(قابلة للتعديل)</span>
+              <span className="text-[10px] text-[#8C7A6B] font-normal">(قابلة للتعديل)</span>
             </label>
             <button
               onClick={() => handleCopy(body, 'body')}
-              className="text-[11px] text-slate-500 hover:text-[#0284C7] flex items-center gap-1 cursor-pointer font-medium"
+              className="text-[11px] text-[#393313] hover:text-[#31031F] flex items-center gap-1 cursor-pointer font-semibold bg-[#F4EDE0] px-2 py-0.5 rounded-lg border border-[#EBDDCB]"
             >
-              {copiedField === 'body' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+              {copiedField === 'body' ? <Check className="w-3 h-3 text-[#66693E]" /> : <Copy className="w-3 h-3" />}
               <span>{copiedField === 'body' ? 'تم النسخ!' : 'نسخ النص'}</span>
             </button>
           </div>
@@ -179,7 +179,7 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows={6}
-            className="w-full p-3 bg-white border border-slate-200 text-xs sm:text-sm font-normal rounded-2xl focus:border-[#0284C7] outline-none resize-none shadow-xs text-slate-800 leading-relaxed flex-1 min-h-[140px]"
+            className="w-full p-3 bg-[#FFFDF9] border border-[#EBDDCB] text-xs sm:text-sm font-normal rounded-2xl focus:border-[#66693E] outline-none resize-none shadow-2xs text-[#31031F] leading-relaxed flex-1 min-h-[140px]"
           />
         </div>
       </div>
@@ -191,8 +191,8 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
           variant="primary"
           size="lg"
           fullWidth
-          icon={<Save className="w-5 h-5 text-white" />}
-          className="bg-[#0284C7] hover:bg-[#0369A1] shadow-md font-bold text-base"
+          icon={<Save className="w-5 h-5 text-[#FFF8ED]" />}
+          className="bg-[#66693E] hover:bg-[#525530] text-[#FFF8ED] shadow-md font-bold text-base"
         >
           حفظ الفكرة في المكتبة 💾
         </Button>
@@ -200,3 +200,4 @@ export const ContentGeneratorScreen: React.FC<ContentGeneratorScreenProps> = ({
     </div>
   );
 };
+export default ContentGeneratorScreen;
