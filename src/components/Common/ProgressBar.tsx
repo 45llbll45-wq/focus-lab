@@ -21,13 +21,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   const sizeStyles = {
     sm: 'h-1.5',
-    md: 'h-2.5',
-    lg: 'h-3.5'
+    md: 'h-2',
+    lg: 'h-3'
   };
 
   const colorStyles = {
-    blue: 'bg-[#017CC3]',
-    yellow: 'bg-[#FFE902]',
+    blue: 'bg-[#0284C7]',
+    yellow: 'bg-[#F59E0B]',
     green: 'bg-emerald-500'
   };
 
@@ -39,7 +39,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           <span className="font-mono">{Math.round(clamped)}%</span>
         </div>
       )}
-      <div className={clsx('w-full bg-[#ADD4E5]/30 rounded-full overflow-hidden p-0.5 border border-[#ADD4E5]/40', sizeStyles[size])}>
+      <div className={clsx('w-full bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60', sizeStyles[size])}>
         <div
           className={clsx('h-full rounded-full transition-all duration-500 ease-out', colorStyles[color])}
           style={{ width: `${clamped}%` }}

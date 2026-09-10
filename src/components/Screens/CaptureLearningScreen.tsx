@@ -12,10 +12,8 @@ interface CaptureLearningScreenProps {
 
 export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
   task,
-  onSaveReflection,
-  onNavigate: _onNavigate
+  onSaveReflection
 }) => {
-  // Free-form notes or structured fields
   const [rawNotes, setRawNotes] = useState(task.reflection?.rawNotes || '');
   const [learned, setLearned] = useState(task.reflection?.learned || '');
   const [challenge, setChallenge] = useState(task.reflection?.challenge || '');
@@ -23,20 +21,18 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
   const [result, setResult] = useState(task.reflection?.result || '');
   const [showDetailedFields, setShowDetailedFields] = useState(false);
 
-  // Guiding questions
   const promptQuestions = [
-    { label: 'وش الشيء الجديد اللي فهمته؟', field: 'learned', placeholder: 'مثال: الفرق بين Webhooks و Polling وكيف توفر عمليات...' },
-    { label: 'وش المشكلة اللي واجهتك؟', field: 'challenge', placeholder: 'مثال: خطأ في قراءة الـ JSON الداخلي، وعالجته بأداة Parse...' },
-    { label: 'وش الشيء اللي جربته؟', field: 'experiment', placeholder: 'مثال: ربطت تيليجرام مع شيت Google لتسجيل الإشعارات...' },
-    { label: 'وش النتيجة؟', field: 'result', placeholder: 'مثال: السيناريو اشتغل فوري ووفّر علي أكثر من نصف ساعة يومياً...' }
+    'وش الشيء الجديد اللي فهمته؟',
+    'وش المشكلة أو الخطأ اللي واجهك؟',
+    'وش الشيء اللي جربته عملياً؟',
+    'وش النتيجة؟'
   ];
 
-  const handlePromptClick = (_question: typeof promptQuestions[0]) => {
+  const handlePromptClick = () => {
     setShowDetailedFields(true);
   };
 
   const handleContinue = () => {
-    // Compile everything into reflection
     const reflection: Reflection = {
       learned: learned.trim() || rawNotes.trim(),
       challenge: challenge.trim(),
@@ -55,44 +51,44 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
     <div className="flex-1 flex flex-col p-5 space-y-5">
       {/* 1. Header */}
       <div className="space-y-1">
-        <div className="flex items-center gap-1.5 text-xs font-semibold text-[#017CC3]">
-          <Lightbulb className="w-3.5 h-3.5 text-[#017CC3]" />
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0284C7]">
+          <Lightbulb className="w-3.5 h-3.5 text-[#0284C7]" />
           <span>توثيق رحلة التعلم والتطبيق</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">
+        <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">
           وش تعلمت؟
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500">
+        <p className="text-xs text-slate-500">
           كل ما تسجلينه هنا سيتحول تلقائياً إلى أفكار محتوى جاهزة للمشاركة والنشر.
         </p>
       </div>
 
       {/* 2. Source Task Badge */}
-      <div className="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center justify-between text-xs">
+      <div className="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center justify-between text-xs shadow-2xs">
         <div className="flex items-center gap-2 truncate">
           <CategoryBadge category={task.category} />
-          <span className="font-bold text-slate-700 truncate">{task.title}</span>
+          <span className="font-semibold text-slate-700 truncate">{task.title}</span>
         </div>
-        <span className="text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 shrink-0">
+        <span className="text-[11px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 shrink-0">
           تم الإنجاز ✓
         </span>
       </div>
 
       {/* 3. Guiding Prompt Chips */}
       <div className="space-y-1.5">
-        <span className="text-xs font-bold text-slate-600 block">
+        <span className="text-xs font-bold text-slate-700 block">
           أسئلة مساعدة لتحفيز التدوين:
         </span>
         <div className="flex flex-wrap gap-1.5">
-          {promptQuestions.map((q, idx) => (
+          {promptQuestions.map((label, idx) => (
             <button
               key={idx}
               type="button"
-              onClick={() => handlePromptClick(q)}
-              className="text-[11px] bg-[#ADD4E5]/20 hover:bg-[#ADD4E5]/40 text-[#01588c] px-3 py-1.5 rounded-xl border border-[#ADD4E5]/50 transition-all cursor-pointer text-right flex items-center gap-1"
+              onClick={handlePromptClick}
+              className="text-[11px] bg-sky-50 hover:bg-sky-100 text-[#0284C7] px-3 py-1.5 rounded-xl border border-sky-200/70 transition-all cursor-pointer text-right flex items-center gap-1 font-medium"
             >
               <span>✨</span>
-              <span>{q.label}</span>
+              <span>{label}</span>
             </button>
           ))}
         </div>
@@ -109,7 +105,7 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
             onChange={(e) => setRawNotes(e.target.value)}
             placeholder="اكتبي ماذا تعلمت اليوم، ما هي المشكلة التي واجهتك، وما النتيجة التي خرجت بها..."
             rows={4}
-            className="w-full p-4 text-sm font-medium rounded-2xl bg-white border-2 border-slate-200 focus:border-[#017CC3] focus:ring-4 focus:ring-[#017CC3]/10 outline-none transition-all placeholder:text-slate-400 resize-none shadow-xs text-[#0F172A] flex-1 min-h-[120px]"
+            className="w-full p-3.5 text-sm font-medium rounded-2xl bg-white border border-slate-200 focus:border-[#0284C7] focus:ring-4 focus:ring-[#0284C7]/10 outline-none transition-all placeholder:text-slate-400 resize-none shadow-xs text-[#0F172A] flex-1 min-h-[120px]"
             autoFocus
           />
         </div>
@@ -122,7 +118,7 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
             className="w-full px-4 py-3 text-xs font-bold text-slate-700 flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer"
           >
             <span className="flex items-center gap-1.5">
-              <PenLine className="w-4 h-4 text-[#017CC3]" />
+              <PenLine className="w-4 h-4 text-[#0284C7]" />
               <span>تفصيل الأسئلة الأربعة (اختياري لنتائج أدق)</span>
             </span>
             {showDetailedFields ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
@@ -137,7 +133,7 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
                   value={learned}
                   onChange={(e) => setLearned(e.target.value)}
                   placeholder="المفهوم أو الفكرة الجديدة..."
-                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#017CC3]"
+                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#0284C7]"
                 />
               </div>
 
@@ -148,7 +144,7 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
                   value={challenge}
                   onChange={(e) => setChallenge(e.target.value)}
                   placeholder="التحدي أو الخطأ وكيف تم التغلب عليه..."
-                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#017CC3]"
+                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#0284C7]"
                 />
               </div>
 
@@ -159,7 +155,7 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
                   value={experiment}
                   onChange={(e) => setExperiment(e.target.value)}
                   placeholder="التطبيق أو السيناريو الذي بنيته..."
-                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#017CC3]"
+                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#0284C7]"
                 />
               </div>
 
@@ -170,7 +166,7 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
                   value={result}
                   onChange={(e) => setResult(e.target.value)}
                   placeholder="الأثر أو السرعة أو الفائدة المحققة..."
-                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#017CC3]"
+                  className="w-full p-2.5 bg-white text-xs rounded-xl border border-slate-200 outline-none focus:border-[#0284C7]"
                 />
               </div>
             </div>
@@ -186,8 +182,8 @@ export const CaptureLearningScreen: React.FC<CaptureLearningScreenProps> = ({
           size="lg"
           fullWidth
           disabled={!hasAnyInput}
-          icon={<Sparkles className="w-5 h-5 text-[#FFE902]" />}
-          className="transition-all text-base font-bold"
+          icon={<Sparkles className="w-5 h-5 text-white" />}
+          className="bg-[#0284C7] hover:bg-[#0369A1] shadow-md transition-all text-base font-bold"
         >
           حوّلها لفكرة محتوى ✨
         </Button>

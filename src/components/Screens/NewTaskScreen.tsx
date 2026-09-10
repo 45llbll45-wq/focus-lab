@@ -54,24 +54,24 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
 
   const timeOptions = [15, 30, 45, 60];
 
-  const energyLevels: { id: EnergyLevel; label: string; icon: string; desc: string }[] = [
-    { id: 'low', label: 'منخفضة', icon: '🔋', desc: 'خطوات أصغر وتدرج خفيف' },
-    { id: 'medium', label: 'متوسطة', icon: '⚡', desc: 'جلسة متوازنة ومباشرة' },
-    { id: 'high', label: 'عالية', icon: '🔥', desc: 'تحدي وتركيز عميق' }
+  const energyLevels: { id: EnergyLevel; label: string; icon: string; desc: string; activeClass: string }[] = [
+    { id: 'low', label: 'منخفضة', icon: '🔋', desc: 'خطوات أصغر وتدرج خفيف', activeClass: 'border-emerald-500 bg-emerald-50/70 text-emerald-900' },
+    { id: 'medium', label: 'متوسطة', icon: '⚡', desc: 'جلسة متوازنة ومباشرة', activeClass: 'border-sky-500 bg-sky-50/70 text-sky-900' },
+    { id: 'high', label: 'عالية', icon: '🔥', desc: 'تحدي وتركيز عميق', activeClass: 'border-amber-500 bg-amber-50/70 text-amber-900' }
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="flex-1 flex flex-col p-5 space-y-6 justify-between">
-      <div className="space-y-5">
+    <form onSubmit={handleSubmit} className="flex-1 flex flex-col p-5 space-y-5 justify-between">
+      <div className="space-y-4">
         {/* 1. Header */}
         <div className="space-y-1">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#017CC3]">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0284C7]">
             <span>الخطوة 1 من 4: تحديد الهدف</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">
+          <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">
             وش تبين تنجزين؟
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <p className="text-xs text-slate-500">
             اكتبي هدفك بكلماتك البسيطة، والتطبيق سيقسمه لخطوات تناسب وقتك وطاقتك.
           </p>
         </div>
@@ -91,7 +91,7 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
             onChange={(e) => setTitle(e.target.value.slice(0, 120))}
             placeholder="مثال: فهم وتطبيق الـ Webhooks في أداة Make لربط النماذج مع Google Sheets..."
             rows={3}
-            className="w-full p-3.5 text-sm font-medium rounded-2xl bg-white border-2 border-slate-200 focus:border-[#017CC3] focus:ring-4 focus:ring-[#017CC3]/10 outline-none transition-all placeholder:text-slate-400 resize-none shadow-xs text-[#0F172A]"
+            className="w-full p-3.5 text-sm font-medium rounded-2xl bg-white border border-slate-200 focus:border-[#0284C7] focus:ring-4 focus:ring-[#0284C7]/10 outline-none transition-all placeholder:text-slate-400 resize-none shadow-xs text-[#0F172A]"
             autoFocus
           />
 
@@ -103,7 +103,7 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
                 key={idx}
                 type="button"
                 onClick={() => setTitle(idea)}
-                className="text-[11px] bg-slate-100 hover:bg-[#ADD4E5]/30 hover:text-[#017CC3] text-slate-600 px-2.5 py-1 rounded-full whitespace-nowrap transition-colors cursor-pointer shrink-0"
+                className="text-[11px] bg-slate-100 hover:bg-sky-50 hover:text-[#0284C7] text-slate-600 px-2.5 py-1 rounded-full whitespace-nowrap transition-colors cursor-pointer shrink-0 border border-slate-200/60"
               >
                 + {idea}
               </button>
@@ -124,13 +124,13 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
                   key={cat.id}
                   type="button"
                   onClick={() => setCategory(cat.id)}
-                  className={`p-2.5 rounded-2xl border-2 flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                  className={`p-2.5 rounded-2xl border transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
                     selected
-                      ? 'border-[#017CC3] bg-[#017CC3]/5 text-[#017CC3] font-bold shadow-xs'
+                      ? 'border-[#0284C7] bg-sky-50/80 text-[#0284C7] font-bold shadow-xs'
                       : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
                   }`}
                 >
-                  <span className="text-lg">{cat.icon}</span>
+                  <span className="text-base">{cat.icon}</span>
                   <span className="text-xs">{cat.label}</span>
                 </button>
               );
@@ -142,10 +142,10 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5 text-[#017CC3]" />
+              <Clock className="w-3.5 h-3.5 text-[#0284C7]" />
               <span>الوقت المتوقع للجلسة:</span>
             </label>
-            <span className="text-xs font-bold text-[#017CC3]">
+            <span className="text-xs font-bold text-[#0284C7]">
               {effectiveTime > 0 ? `${effectiveTime} دقيقة` : 'غير محدد'}
             </span>
           </div>
@@ -161,9 +161,9 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
                     setIsCustomTime(false);
                     setTimeMinutes(t);
                   }}
-                  className={`py-2 px-1 rounded-2xl border-2 text-xs font-bold transition-all cursor-pointer ${
+                  className={`py-2 px-1 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                     selected
-                      ? 'border-[#017CC3] bg-[#017CC3] text-white shadow-xs'
+                      ? 'border-[#0284C7] bg-[#0284C7] text-white shadow-xs'
                       : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
                   }`}
                 >
@@ -175,9 +175,9 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
             <button
               type="button"
               onClick={() => setIsCustomTime(true)}
-              className={`py-2 px-1 rounded-2xl border-2 text-xs font-bold transition-all cursor-pointer ${
+              className={`py-2 px-1 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                 isCustomTime
-                  ? 'border-[#017CC3] bg-[#017CC3] text-white shadow-xs'
+                  ? 'border-[#0284C7] bg-[#0284C7] text-white shadow-xs'
                   : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
               }`}
             >
@@ -186,7 +186,7 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
           </div>
 
           {isCustomTime && (
-            <div className="flex items-center gap-2 mt-2 bg-white p-2.5 rounded-2xl border border-slate-200">
+            <div className="flex items-center gap-2 mt-2 bg-white p-2.5 rounded-xl border border-slate-200">
               <span className="text-xs text-slate-500 font-medium">أدخل الدقائق:</span>
               <input
                 type="number"
@@ -194,7 +194,7 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
                 max="180"
                 value={customTimeValue}
                 onChange={(e) => setCustomTimeValue(e.target.value)}
-                className="w-20 p-1.5 text-center text-sm font-bold bg-slate-50 rounded-xl border border-slate-300 outline-none focus:border-[#017CC3]"
+                className="w-20 p-1 text-center text-xs font-bold bg-slate-50 rounded-lg border border-slate-300 outline-none focus:border-[#0284C7]"
                 autoFocus
               />
               <span className="text-xs text-slate-400">دقيقة (بين 5 و 180)</span>
@@ -205,7 +205,7 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
         {/* 5. Energy Level Selector */}
         <div className="space-y-2">
           <label className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
-            <Battery className="w-3.5 h-3.5 text-[#017CC3]" />
+            <Battery className="w-3.5 h-3.5 text-[#0284C7]" />
             <span>مستوى طاقتك الآن:</span>
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -216,9 +216,9 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
                   key={lvl.id}
                   type="button"
                   onClick={() => setEnergy(lvl.id)}
-                  className={`p-3 rounded-2xl border-2 flex flex-col items-start gap-1 transition-all cursor-pointer text-right ${
+                  className={`p-3 rounded-2xl border transition-all cursor-pointer text-right flex flex-col items-start gap-1 ${
                     selected
-                      ? 'border-[#FFE902] bg-[#FFE902]/15 text-[#0F172A] shadow-xs'
+                      ? `${lvl.activeClass} shadow-xs font-bold`
                       : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
                   }`}
                 >
@@ -237,14 +237,14 @@ export const NewTaskScreen: React.FC<NewTaskScreenProps> = ({
       </div>
 
       {/* 6. Primary Action: توليد الخطة الذكية */}
-      <div className="pt-4 sticky bottom-4 z-20">
+      <div className="pt-2 sticky bottom-4 z-20">
         <Button
           type="submit"
           variant="primary"
           size="lg"
           fullWidth
           disabled={!isValid}
-          className="bg-[#017CC3] hover:bg-[#0169a5] shadow-xl text-base font-bold transition-all"
+          className="bg-[#0284C7] hover:bg-[#0369A1] shadow-md text-base font-bold transition-all"
         >
           توليد خطة التنفيذ الذكية ✨
         </Button>

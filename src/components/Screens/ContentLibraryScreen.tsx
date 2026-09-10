@@ -70,14 +70,14 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
       {/* 1. Header */}
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ADD4E5]/30 text-[#01588c] text-xs font-semibold">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-[#0284C7] text-xs font-semibold border border-sky-200/60">
             <BookOpen className="w-3.5 h-3.5" />
             <span>حصيلة التعلم والتطبيق</span>
           </div>
           {ideas.length > 0 && (
             <button
               onClick={handleExportMarkdown}
-              className="text-xs text-slate-500 hover:text-[#017CC3] flex items-center gap-1 cursor-pointer font-medium"
+              className="text-xs text-slate-600 hover:text-[#0284C7] flex items-center gap-1 cursor-pointer font-semibold bg-white px-2.5 py-1 rounded-xl border border-slate-200 shadow-2xs transition-colors"
               title="تصدير كملف Markdown"
             >
               <Download className="w-3.5 h-3.5" />
@@ -89,7 +89,7 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
         <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">
           مكتبة المحتوى
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500">
+        <p className="text-xs text-slate-500">
           أفكار ومسودات ومقاطع تولدت طبيعياً من تجاربك اليومية في الـ AI Automation.
         </p>
       </div>
@@ -105,9 +105,9 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
           <button
             key={f.id}
             onClick={() => setStatusFilter(f.id as typeof statusFilter)}
-            className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all cursor-pointer font-medium ${
+            className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all cursor-pointer font-semibold ${
               statusFilter === f.id
-                ? 'bg-[#017CC3] text-white shadow-xs font-bold'
+                ? 'bg-[#0284C7] text-white shadow-xs'
                 : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
             }`}
           >
@@ -119,8 +119,8 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
       {/* 3. Content Ideas Cards */}
       <div className="space-y-3 flex-1">
         {filteredIdeas.length === 0 ? (
-          <div className="bg-white border-2 border-dashed border-slate-200 rounded-3xl p-8 text-center space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-[#FFE902]/20 flex items-center justify-center text-amber-700 mx-auto text-xl">
+          <div className="bg-white border border-dashed border-slate-200 rounded-2xl p-8 text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-700 mx-auto text-xl">
               ✍️
             </div>
             <div className="space-y-1">
@@ -133,7 +133,7 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
               onClick={onNewTask}
               variant="primary"
               size="sm"
-              icon={<Plus className="w-4 h-4" />}
+              icon={<Plus className="w-4 h-4 text-white" />}
             >
               جلسة تركيز جديدة
             </Button>
@@ -145,7 +145,7 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
             return (
               <div
                 key={idea.id}
-                className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs space-y-3 hover:border-[#ADD4E5] transition-all"
+                className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3 hover:border-sky-300 transition-all"
               >
                 {/* Header: Type, Status, Task Source */}
                 <div className="flex items-start justify-between gap-2">
@@ -156,7 +156,7 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
                       <select
                         value={idea.status}
                         onChange={(e) => handleStatusChange(idea, e.target.value as ContentStatus)}
-                        className="text-xs bg-slate-50 border border-slate-200 rounded-full px-2.5 py-0.5 font-bold outline-none cursor-pointer text-slate-700 hover:border-[#017CC3]"
+                        className="text-xs bg-slate-50 border border-slate-200 rounded-full px-2.5 py-0.5 font-bold outline-none cursor-pointer text-slate-700 hover:border-[#0284C7]"
                       >
                         <option value="idea">فكرة (Idea)</option>
                         <option value="draft">مسودة (Draft)</option>
@@ -187,8 +187,8 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
                 )}
 
                 {/* Hook preview */}
-                <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-2.5 space-y-1">
-                  <span className="text-[10px] font-bold text-amber-900 block">🪝 Hook:</span>
+                <div className="bg-amber-50/50 border border-amber-200/60 rounded-xl p-2.5 space-y-1">
+                  <span className="text-[10px] font-bold text-amber-800 block">🪝 Hook:</span>
                   <p className="text-xs font-semibold text-amber-950 leading-relaxed">
                     {idea.hook}
                   </p>
@@ -205,7 +205,7 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
                 <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
                   <button
                     onClick={() => setExpandedId(isExpanded ? null : idea.id)}
-                    className="text-[#017CC3] hover:underline font-bold flex items-center gap-1 cursor-pointer text-[11px]"
+                    className="text-[#0284C7] hover:underline font-bold flex items-center gap-1 cursor-pointer text-[11px]"
                   >
                     <span>{isExpanded ? 'إخفاء التفاصيل' : 'عرض كامل النص والمسودة'}</span>
                     {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -213,7 +213,7 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
 
                   <button
                     onClick={() => handleCopy(`${idea.title}\n\n🪝 Hook:\n${idea.hook}\n\n📝 النص:\n${idea.body}`, idea.id)}
-                    className="text-slate-500 hover:text-[#017CC3] flex items-center gap-1 font-semibold cursor-pointer text-[11px] bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg transition-colors"
+                    className="text-slate-500 hover:text-[#0284C7] flex items-center gap-1 font-semibold cursor-pointer text-[11px] bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg transition-colors"
                   >
                     {copiedId === idea.id ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
                     <span>{copiedId === idea.id ? 'تم النسخ!' : 'نسخ كامل الفكرة'}</span>
@@ -232,8 +232,8 @@ export const ContentLibraryScreen: React.FC<ContentLibraryScreenProps> = ({
           variant="primary"
           size="lg"
           fullWidth
-          icon={<Plus className="w-5 h-5" />}
-          className="bg-[#017CC3] hover:bg-[#0169a5] shadow-xl text-base font-bold"
+          icon={<Plus className="w-5 h-5 text-white" />}
+          className="bg-[#0284C7] hover:bg-[#0369A1] shadow-md text-base font-bold"
         >
           جلسة تركيز جديدة 🚀
         </Button>
