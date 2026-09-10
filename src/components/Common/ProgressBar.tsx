@@ -26,20 +26,20 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   };
 
   const colorStyles = {
-    blue: 'bg-[#66693E]',
-    yellow: 'bg-[#C5A880]',
-    green: 'bg-[#66693E]'
+    blue: 'bg-[#4F46E5]',
+    yellow: 'bg-amber-500',
+    green: 'bg-emerald-500'
   };
 
   return (
     <div className={twMerge('w-full', className)}>
       {showLabel && (
-        <div className="flex justify-between items-center text-xs font-semibold text-[#393313] mb-1.5">
+        <div className="flex justify-between items-center text-xs font-semibold text-slate-600 mb-1.5">
           <span>التقدم</span>
           <span className="font-mono">{Math.round(clamped)}%</span>
         </div>
       )}
-      <div className={clsx('w-full bg-[#EBDDCB] rounded-full overflow-hidden p-0.5 border border-[#D9C9B4]', sizeStyles[size])}>
+      <div className={clsx('w-full bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60', sizeStyles[size])}>
         <div
           className={clsx('h-full rounded-full transition-all duration-500 ease-out', colorStyles[color])}
           style={{ width: `${clamped}%` }}

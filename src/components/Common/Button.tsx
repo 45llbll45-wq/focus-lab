@@ -30,12 +30,12 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantStyles = {
-    primary: 'bg-[#66693E] text-[#FFF8ED] hover:bg-[#525530] shadow-sm shadow-[#66693E]/20 hover:shadow-md hover:shadow-[#66693E]/30',
-    accent: 'bg-[#31031F] text-[#FFF8ED] hover:bg-[#4A0A31] shadow-sm shadow-[#31031F]/20 hover:shadow-md hover:shadow-[#31031F]/30',
-    secondary: 'bg-[#F4EDE0] text-[#31031F] hover:bg-[#EBDDCB] border border-[#EBDDCB]',
-    outline: 'bg-white text-[#31031F] border border-[#EBDDCB] hover:border-[#D9C9B4] hover:bg-[#FAF4EB] shadow-2xs',
-    ghost: 'bg-transparent text-[#393313] hover:text-[#31031F] hover:bg-[#F4EDE0]',
-    danger: 'bg-rose-50 text-rose-800 hover:bg-rose-100 border border-rose-200'
+    primary: 'bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-sm shadow-indigo-500/20 hover:shadow-md hover:shadow-indigo-500/30',
+    accent: 'bg-[#10B981] text-white hover:bg-[#059669] shadow-sm shadow-emerald-500/20 hover:shadow-md hover:shadow-emerald-500/30',
+    secondary: 'bg-indigo-50 text-[#4F46E5] hover:bg-indigo-100 border border-indigo-200/60',
+    outline: 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-2xs',
+    ghost: 'bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100',
+    danger: 'bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200'
   };
 
   return (
