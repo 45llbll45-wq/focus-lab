@@ -33,30 +33,30 @@ export const Header: React.FC<HeaderProps> = ({
   const isLibrary = activeScreen === 'content_library';
 
   return (
-    <header className="px-5 py-3.5 bg-white/95 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between sticky top-0 z-30 shrink-0 text-[#0F172A]">
+    <header className="px-5 py-3.5 bg-[#fcfbf8]/95 backdrop-blur-md border-b border-[#ece7de] flex items-center justify-between sticky top-0 z-30 shrink-0 text-[#1e1b24]">
       <div className="flex items-center gap-2">
         {showBack ? (
           <button
             onClick={onBack}
-            className="p-2 -mr-2 rounded-xl text-slate-600 hover:text-[#4F46E5] hover:bg-slate-100 active:scale-95 transition-all flex items-center gap-1 cursor-pointer"
+            className="p-2 -mr-2 rounded-xl text-[#3e2f59] hover:bg-[#dbb0cf]/30 active:scale-95 transition-all flex items-center gap-1 cursor-pointer"
             aria-label="الرجوع"
           >
-            <ChevronRight className="w-5 h-5 text-slate-700" />
-            <span className="text-xs font-semibold text-slate-700">رجوع</span>
+            <ChevronRight className="w-5 h-5 text-[#3e2f59]" />
+            <span className="text-xs font-bold text-[#3e2f59]">رجوع</span>
           </button>
         ) : (
           <div 
             onClick={onGoHome} 
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="w-8 h-8 rounded-xl bg-[#4F46E5] flex items-center justify-center text-white font-bold text-sm shadow-xs group-hover:scale-105 transition-transform">
+            <div className="w-8 h-8 rounded-xl bg-[#3e2f59] flex items-center justify-center text-[#c6ed58] font-black text-sm shadow-xs group-hover:scale-105 transition-transform">
               <span>FL</span>
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-sm text-[#0F172A] tracking-tight">Focus Lab</span>
+                <span className="font-bold text-sm text-[#1e1b24] tracking-tight">Focus Lab</span>
               </div>
-              <p className="text-[10px] text-slate-400 font-medium">Learn → Build → Create</p>
+              <p className="text-[10px] text-[#6b6475] font-medium">Learn → Build → Create</p>
             </div>
           </div>
         )}
@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({
         {!isHome && onGoHome && (
           <button
             onClick={onGoHome}
-            className="p-2 rounded-xl text-slate-500 hover:text-[#4F46E5] hover:bg-slate-100 active:scale-95 transition-all cursor-pointer"
+            className="p-2 rounded-xl text-[#6b6475] hover:text-[#3e2f59] hover:bg-[#dbb0cf]/25 active:scale-95 transition-all cursor-pointer"
             title="الرئيسية"
           >
             <Home className="w-4 h-4" />
@@ -76,10 +76,10 @@ export const Header: React.FC<HeaderProps> = ({
         {onOpenLibrary && (
           <button
             onClick={onOpenLibrary}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
               isLibrary
-                ? "bg-[#4F46E5] text-white shadow-xs"
-                : "bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-[#4F46E5]"
+                ? "bg-[#3e2f59] text-[#fcfbf8] shadow-xs"
+                : "bg-[#dbb0cf]/30 text-[#3e2f59] hover:bg-[#dbb0cf]/50"
             }`}
             title="مكتبة المحتوى"
           >
@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span>المكتبة</span>
             {contentCount > 0 && (
               <span className={`px-1.5 py-0.2 text-[10px] rounded-full font-bold ${
-                isLibrary ? "bg-white text-[#4F46E5]" : "bg-[#4F46E5] text-white"
+                isLibrary ? "bg-[#c6ed58] text-[#1e1b24]" : "bg-[#3e2f59] text-[#fcfbf8]"
               }`}>
                 {contentCount}
               </span>
@@ -97,10 +97,10 @@ export const Header: React.FC<HeaderProps> = ({
 
         <button
           onClick={toggleSound}
-          className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+          className="p-2 rounded-xl text-[#6b6475] hover:text-[#3e2f59] hover:bg-[#dbb0cf]/25 transition-colors cursor-pointer"
           title={soundOn ? "كتم الصوت" : "تفعيل الصوت"}
         >
-          {soundOn ? <Volume2 className="w-4 h-4 text-[#4F46E5]" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
+          {soundOn ? <Volume2 className="w-4 h-4 text-[#3e2f59]" /> : <VolumeX className="w-4 h-4 text-[#878191]" />}
         </button>
       </div>
     </header>

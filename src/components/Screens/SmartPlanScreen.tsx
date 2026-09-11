@@ -54,34 +54,34 @@ export const SmartPlanScreen: React.FC<SmartPlanScreenProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col p-5 space-y-5 justify-between text-slate-900">
+    <div className="flex-1 flex flex-col p-5 space-y-5 justify-between text-[#1e1b24]">
       <div className="space-y-4">
         {/* 1. Header */}
         <div className="space-y-1">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600">
-            <span className="bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100">الخطوة 2 من 4: خطة التنفيذ</span>
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#3e2f59]">
+            <span className="bg-[#dbb0cf]/35 text-[#3e2f59] px-2.5 py-0.5 rounded-full border border-[#dbb0cf]/60">الخطوة 2 من 4: خطة التنفيذ</span>
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-bold text-[#1e1b24] tracking-tight">
             كيف بنسويه؟
           </h1>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[#6b6475]">
             قسمنا المهمة إلى خطوات صغيرة قابلة للتركيز والتنفيذ خطوة بخطوة.
           </p>
         </div>
 
         {/* 2. Task Summary Card */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm space-y-2">
+        <div className="bg-white p-4 rounded-2xl border border-[#ece7de] shadow-xs space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
               <CategoryBadge category={task.category} />
               <EnergyBadge energy={task.energy} />
             </div>
-            <div className="flex items-center gap-1 text-xs text-indigo-600 font-bold font-mono">
+            <div className="flex items-center gap-1 text-xs text-[#3e2f59] font-bold font-mono">
               <Clock className="w-3.5 h-3.5" />
               <span>{totalCalculatedMinutes} دقيقة إجمالية</span>
             </div>
           </div>
-          <h2 className="text-sm font-bold text-slate-900 leading-snug">
+          <h2 className="text-sm font-bold text-[#1e1b24] leading-snug">
             {task.title}
           </h2>
         </div>
@@ -89,13 +89,13 @@ export const SmartPlanScreen: React.FC<SmartPlanScreenProps> = ({
         {/* 3. Steps Breakdown List */}
         <div className="space-y-2.5">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-slate-700">
+            <label className="text-xs font-bold text-[#1e1b24]">
               خطوات الجلسة ({steps.length}):
             </label>
             <button
               type="button"
               onClick={handleAddStep}
-              className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 cursor-pointer bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-xl transition-colors border border-indigo-100"
+              className="text-xs font-bold text-[#1e1b24] hover:text-[#3e2f59] flex items-center gap-1 cursor-pointer bg-[#c6ed58]/40 hover:bg-[#c6ed58]/70 px-2.5 py-1 rounded-xl transition-colors border border-[#c6ed58]"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>إضافة خطوة</span>
@@ -110,19 +110,19 @@ export const SmartPlanScreen: React.FC<SmartPlanScreenProps> = ({
                 <div
                   key={step.id}
                   className={`p-3.5 rounded-2xl bg-white border transition-all space-y-2 relative group ${
-                    isFirstMicro ? 'border-indigo-200 bg-indigo-50/40 shadow-xs ring-1 ring-indigo-500/20' : 'border-slate-200/80 hover:border-slate-300'
+                    isFirstMicro ? 'border-[#c6ed58] bg-[#c6ed58]/15 shadow-xs ring-1 ring-[#c6ed58]/40' : 'border-[#ece7de] hover:border-[#dbb0cf]'
                   }`}
                 >
                   {isFirstMicro && (
-                    <div className="flex items-center gap-1 text-[10px] font-semibold text-indigo-700 bg-indigo-100/70 border border-indigo-200 px-2 py-0.5 rounded-full w-fit mb-1">
-                      <Sparkles className="w-3 h-3 text-indigo-600" />
+                    <div className="flex items-center gap-1 text-[10px] font-bold text-[#1e1b24] bg-[#c6ed58] border border-[#b8e244] px-2 py-0.5 rounded-full w-fit mb-1">
+                      <Sparkles className="w-3 h-3 text-[#3e2f59]" />
                       <span>بداية ميسرة (&lt; 5 دقائق) لبناء الزخم</span>
                     </div>
                   )}
 
                   <div className="flex items-start gap-2.5">
                     {/* Step Number Circle */}
-                    <div className="w-6 h-6 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 font-mono">
+                    <div className="w-6 h-6 rounded-full bg-[#3e2f59] text-[#c6ed58] border border-[#3e2f59] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 font-mono">
                       {idx + 1}
                     </div>
 
@@ -132,21 +132,21 @@ export const SmartPlanScreen: React.FC<SmartPlanScreenProps> = ({
                         type="text"
                         value={step.text}
                         onChange={(e) => handleStepTextChange(step.id, e.target.value)}
-                        className="w-full text-xs sm:text-sm font-semibold text-slate-800 bg-transparent outline-none border-b border-transparent focus:border-indigo-600 transition-colors"
+                        className="w-full text-xs sm:text-sm font-bold text-[#1e1b24] bg-transparent outline-none border-b border-transparent focus:border-[#3e2f59] transition-colors"
                       />
                     </div>
 
                     {/* Duration input */}
-                    <div className="flex items-center gap-1 shrink-0 bg-slate-50 px-2 py-1 rounded-xl border border-slate-200">
+                    <div className="flex items-center gap-1 shrink-0 bg-[#dbb0cf]/25 px-2 py-1 rounded-xl border border-[#dbb0cf]/40">
                       <input
                         type="number"
                         min="1"
                         max="120"
                         value={step.durationMinutes}
                         onChange={(e) => handleStepDurationChange(step.id, parseInt(e.target.value, 10) || 1)}
-                        className="w-8 text-center text-xs font-bold font-mono bg-transparent outline-none text-slate-900"
+                        className="w-8 text-center text-xs font-bold font-mono bg-transparent outline-none text-[#1e1b24]"
                       />
-                      <span className="text-[10px] text-slate-400 font-medium">د</span>
+                      <span className="text-[10px] text-[#6b6475] font-bold">د</span>
                     </div>
 
                     {/* Delete button if > 1 step */}
@@ -154,7 +154,7 @@ export const SmartPlanScreen: React.FC<SmartPlanScreenProps> = ({
                       <button
                         type="button"
                         onClick={() => handleDeleteStep(step.id)}
-                        className="text-slate-300 hover:text-rose-500 p-1 transition-colors cursor-pointer shrink-0"
+                        className="text-[#878191] hover:text-rose-600 p-1 transition-colors cursor-pointer shrink-0"
                         title="حذف الخطوة"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -175,8 +175,8 @@ export const SmartPlanScreen: React.FC<SmartPlanScreenProps> = ({
           variant="primary"
           size="lg"
           fullWidth
-          icon={<Play className="w-4 h-4 fill-current text-white" />}
-          className="shadow-lg shadow-indigo-600/20 text-base font-bold"
+          icon={<Play className="w-4 h-4 fill-current text-[#c6ed58]" />}
+          className="bg-[#3e2f59] hover:bg-[#2e2243] text-[#fcfbf8] shadow-lg shadow-[#3e2f59]/20 text-base font-bold"
         >
           ابدأ جلسة التركيز ⚡
         </Button>
